@@ -1,0 +1,1 @@
+get_ipython().system('find /content -mindepth 1 -maxdepth 1 -exec rm -rf {} +')

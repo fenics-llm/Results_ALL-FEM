@@ -1,0 +1,6 @@
+rho   = 1 kg/m^3
+mu    = 1.5e-05 Pa s
+alpha = 2.1e-05 m^2/s
+g*beta= 3.15e-05 m/s^2/K
+T_ref = 0.5 K
+Nu_avg(left) = 4.522886991

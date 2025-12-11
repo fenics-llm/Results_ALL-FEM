@@ -1,0 +1,6 @@
+rho = 1 kg/m^3
+mu  = 0.001 Pa s
+Ubar= 0.2 m/s
+D   = 0.1 m
+F_D = 0.000000000e+00 N per unit thickness
+C_D = 0.000000000
