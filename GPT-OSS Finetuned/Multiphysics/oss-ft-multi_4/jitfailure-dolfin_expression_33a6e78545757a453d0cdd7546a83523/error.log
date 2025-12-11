@@ -1,0 +1,12 @@
+/tmp/tmplu4zbt_x/dolfin_expression_33a6e78545757a453d0cdd7546a83523.cpp: In member function ‘virtual void dolfin::dolfin_expression_33a6e78545757a453d0cdd7546a83523::eval(Eigen::Ref<Eigen::Matrix<double, -1, 1> >, Eigen::Ref<const Eigen::Matrix<double, -1, 1> >) const’:
+/tmp/tmplu4zbt_x/dolfin_expression_33a6e78545757a453d0cdd7546a83523.cpp:65:31: error: ‘y’ was not declared in this scope; did you mean ‘yn’?
+   65 |           values[0] = -K - (g*y)/(2*nu) + (K/2 - alpha*g/(4*nu*nu))*y*y;
+      |                               ^
+      |                               yn
+/tmp/tmplu4zbt_x/dolfin_expression_33a6e78545757a453d0cdd7546a83523.cpp: In member function ‘virtual double dolfin::dolfin_expression_33a6e78545757a453d0cdd7546a83523::get_property(std::string) const’:
+/tmp/tmplu4zbt_x/dolfin_expression_33a6e78545757a453d0cdd7546a83523.cpp:77:11: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   77 |           if (name == "K") return K;          if (name == "g") return g;          if (name == "nu") return nu;          if (name == "alpha") return alpha;
+      |           ^~
+/tmp/tmplu4zbt_x/dolfin_expression_33a6e78545757a453d0cdd7546a83523.cpp:77:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   77 |           if (name == "K") return K;          if (name == "g") return g;          if (name == "nu") return nu;          if (name == "alpha") return alpha;
+      |                                               ^~

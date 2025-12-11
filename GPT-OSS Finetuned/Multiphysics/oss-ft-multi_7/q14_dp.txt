@@ -1,0 +1,1 @@
+Pressure drop across porous block (Pa): 1.334892e+03
