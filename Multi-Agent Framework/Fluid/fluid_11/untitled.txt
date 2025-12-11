@@ -1,0 +1,1 @@
+Maximum centre-line ux at x = L/2 : 1.319351 m/s

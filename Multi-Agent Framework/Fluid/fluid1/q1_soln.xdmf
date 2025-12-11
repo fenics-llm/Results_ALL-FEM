@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="TimeSeries_f_23-0" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4000" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4000 3" NumberType="UInt" Format="HDF">q1_soln.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2111 2" Format="HDF">q1_soln.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_23-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2111 3" Format="HDF">q1_soln.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TimeSeries_f_23-1" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4000" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4000 3" NumberType="UInt" Format="HDF">q1_soln.h5:/Mesh/1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2111 2" Format="HDF">q1_soln.h5:/Mesh/1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_23-1" AttributeType="Scalar" Center="Node">
+          <DataItem Dimensions="2111 1" Format="HDF">q1_soln.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>

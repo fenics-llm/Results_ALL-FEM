@@ -1,0 +1,2 @@
+Outlet flow rate (numerical) = 3.354697e-04
+Outlet flow rate (exact)    = 3.333333e-04

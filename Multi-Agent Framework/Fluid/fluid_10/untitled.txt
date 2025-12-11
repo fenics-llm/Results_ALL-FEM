@@ -1,0 +1,1 @@
+Average Nusselt number on left wall: -3.729136
