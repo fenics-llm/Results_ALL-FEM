@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="TimeSeries" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4096" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4096 3" NumberType="UInt" Format="HDF">velocity_periodic.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2113 2" Format="HDF">velocity_periodic.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_18" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2113 3" Format="HDF">velocity_periodic.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4096" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4096 3" NumberType="UInt" Format="HDF">velocity_periodic.h5:/Mesh/1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2113 2" Format="HDF">velocity_periodic.h5:/Mesh/1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.500000000000001e-01" />
+        <Attribute Name="f_9-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2113 3" Format="HDF">velocity_periodic.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4096" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4096 3" NumberType="UInt" Format="HDF">velocity_periodic.h5:/Mesh/2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2113 2" Format="HDF">velocity_periodic.h5:/Mesh/2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="5.000000000000003e-01" />
+        <Attribute Name="f_9-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2113 3" Format="HDF">velocity_periodic.h5:/VisualisationVector/2</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="4096" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="4096 3" NumberType="UInt" Format="HDF">velocity_periodic.h5:/Mesh/3/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2113 2" Format="HDF">velocity_periodic.h5:/Mesh/3/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.000000000000001e+00" />
+        <Attribute Name="f_9-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2113 3" Format="HDF">velocity_periodic.h5:/VisualisationVector/3</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>
