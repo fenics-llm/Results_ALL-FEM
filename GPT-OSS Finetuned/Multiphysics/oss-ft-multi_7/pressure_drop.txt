@@ -1,1 +1,0 @@
-Pressure drop Δp = 1.334892e+03 Pa
