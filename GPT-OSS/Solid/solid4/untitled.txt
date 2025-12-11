@@ -1,0 +1,2 @@
+Maximum von Mises stress: 6.50 MPa
+Stress concentration factor Kt = σ_max / 2 MPa = 3.252
