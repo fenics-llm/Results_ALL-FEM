@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid Name="mesh" GridType="Uniform">
+      <Topology NumberOfElements="28976" TopologyType="Triangle" NodesPerElement="3">
+        <DataItem Dimensions="28976 3" NumberType="UInt" Format="HDF">q4_displacement.h5:/Mesh/mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XY">
+        <DataItem Dimensions="14903 2" Format="HDF">q4_displacement.h5:/Mesh/mesh/geometry</DataItem>
+      </Geometry>
+      <Attribute Name="displacement" AttributeType="Vector" Center="Node">
+        <DataItem Dimensions="14903 3" Format="HDF">q4_displacement.h5:/VisualisationVector/0</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>

@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="TimeSeries" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="5.000000000000000e-02" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/2</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/3/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/3/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/3</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/4/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/4/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/4</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/5/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/5/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="3.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/5</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/6/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/6/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="3.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/6</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/7/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/7/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="4.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/7</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/8/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/8/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="4.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/8</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/9/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/9/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="5.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/9</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/10/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/10/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="5.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/10</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/11/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/11/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="6.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/11</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/12/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/12/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="6.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/12</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/13/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/13/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="7.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/13</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/14/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/14/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="7.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/14</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/15/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/15/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="8.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/15</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/16/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/16/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="8.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/16</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/17/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/17/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="9.000000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/17</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/18/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/18/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="9.500000000000000e-01" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/18</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="15086" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="15086 3" NumberType="UInt" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/19/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="7764 2" Format="HDF">quarter_hole_j2_disp.h5:/Mesh/19/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.000000000000000e+00" />
+        <Attribute Name="f_6350" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="7764 3" Format="HDF">quarter_hole_j2_disp.h5:/VisualisationVector/19</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>
