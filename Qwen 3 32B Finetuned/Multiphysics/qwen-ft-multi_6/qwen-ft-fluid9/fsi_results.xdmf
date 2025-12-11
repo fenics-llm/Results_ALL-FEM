@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="TimeSeries_f_125-0" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="3955" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="3955 3" NumberType="UInt" Format="HDF">fsi_results.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2144 2" Format="HDF">fsi_results.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_125-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="2144 3" Format="HDF">fsi_results.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TimeSeries_f_125-1" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="3955" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="3955 3" NumberType="UInt" Format="HDF">fsi_results.h5:/Mesh/1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="2144 2" Format="HDF">fsi_results.h5:/Mesh/1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_125-1" AttributeType="Scalar" Center="Node">
+          <DataItem Dimensions="2144 1" Format="HDF">fsi_results.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid Name="mesh" GridType="Uniform">
+      <Topology NumberOfElements="2025" TopologyType="Triangle" NodesPerElement="3">
+        <DataItem Dimensions="2025 3" NumberType="UInt" Format="HDF">q6_soln.h5:/Mesh/mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XY">
+        <DataItem Dimensions="1124 2" Format="HDF">q6_soln.h5:/Mesh/mesh/geometry</DataItem>
+      </Geometry>
+      <Attribute Name="pressure" AttributeType="Scalar" Center="Node">
+        <DataItem Dimensions="1124 1" Format="HDF">q6_soln.h5:/VisualisationVector/0</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
