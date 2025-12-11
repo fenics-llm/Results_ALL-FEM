@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid Name="mesh" GridType="Uniform">
+      <Topology NumberOfElements="16384" TopologyType="Triangle" NodesPerElement="3">
+        <DataItem Dimensions="16384 3" NumberType="UInt" Format="HDF">stokes_velocity.h5:/Mesh/mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XY">
+        <DataItem Dimensions="8385 2" Format="HDF">stokes_velocity.h5:/Mesh/mesh/geometry</DataItem>
+      </Geometry>
+      <Attribute Name="f_6317" AttributeType="Vector" Center="Node">
+        <DataItem Dimensions="8385 3" Format="HDF">stokes_velocity.h5:/VisualisationVector/0</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
