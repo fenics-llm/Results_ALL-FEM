@@ -1,0 +1,111 @@
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp: In member function ‘virtual void dolfin::dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4::eval(Eigen::Ref<Eigen::Matrix<double, -1, 1> >, Eigen::Ref<const Eigen::Matrix<double, -1, 1> >) const’:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:65:25: error: ‘y’ was not declared in this scope; did you mean ‘yn’?
+   65 |           values[0] =  (y>0 ? (-g/(2*nu) + (K - alpha*g/(2*nu*nu))*y)*cos(x) : 0.0);
+      |                         ^
+      |                         yn
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:65:74: error: no matching function for call to ‘cos(Eigen::Ref<const Eigen::Matrix<double, -1, 1> >&)’
+   65 |           values[0] =  (y>0 ? (-g/(2*nu) + (K - alpha*g/(2*nu*nu))*y)*cos(x) : 0.0);
+      |                                                                       ~~~^~~
+In file included from /usr/local/include/eigen3/Eigen/Core:50,
+                 from /usr/local/include/eigen3/Eigen/Dense:1,
+                 from /usr/local/include/dolfin/function/Expression.h:26,
+                 from /tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:13:
+/usr/local/include/c++/12/complex:737:5: note: candidate: ‘template<class _Tp> std::complex<_Tp> std::cos(const complex<_Tp>&)’
+  737 |     cos(const complex<_Tp>& __z) { return __complex_cos(__z.__rep()); }
+      |     ^~~
+/usr/local/include/c++/12/complex:737:5: note:   template argument deduction/substitution failed:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:65:74: note:   ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ is not derived from ‘const std::complex<_Tp>’
+   65 |           values[0] =  (y>0 ? (-g/(2*nu) + (K - alpha*g/(2*nu*nu))*y)*cos(x) : 0.0);
+      |                                                                       ~~~^~~
+In file included from /usr/local/lib/python3.12/dist-packages/ffc/backends/ufc/ufc_geometry.h:9,
+                 from /usr/local/lib/python3.12/dist-packages/ffc/backends/ufc/ufc.h:22,
+                 from /usr/local/include/dolfin/function/Expression.h:25:
+/usr/local/include/c++/12/cmath:196:5: note: candidate: ‘template<class _Tp> constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::cos(_Tp)’
+  196 |     cos(_Tp __x)
+      |     ^~~
+/usr/local/include/c++/12/cmath:196:5: note:   template argument deduction/substitution failed:
+/usr/local/include/c++/12/cmath: In substitution of ‘template<class _Tp> constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::cos(_Tp) [with _Tp = Eigen::Ref<const Eigen::Matrix<double, -1, 1> >]’:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:65:74:   required from here
+/usr/local/include/c++/12/cmath:196:5: error: no type named ‘__type’ in ‘struct __gnu_cxx::__enable_if<false, double>’
+In file included from /usr/local/include/eigen3/Eigen/Core:380:
+/usr/local/include/eigen3/Eigen/src/Core/GlobalFunctions.h:61:3: note: candidate: ‘template<class Derived> const Eigen::CwiseUnaryOp<Eigen::internal::scalar_cos_op<typename Derived::Scalar>, const Derived> Eigen::cos(const ArrayBase<Derived>&)’
+   61 |   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(cos,scalar_cos_op,cosine,\sa ArrayBase::cos)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/include/eigen3/Eigen/src/Core/GlobalFunctions.h:61:3: note:   template argument deduction/substitution failed:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:65:74: note:   ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ is not derived from ‘const Eigen::ArrayBase<Derived>’
+   65 |           values[0] =  (y>0 ? (-g/(2*nu) + (K - alpha*g/(2*nu*nu))*y)*cos(x) : 0.0);
+      |                                                                       ~~~^~~
+In file included from /usr/include/features.h:486,
+                 from /usr/local/include/c++/12/x86_64-linux-gnu/bits/os_defines.h:39,
+                 from /usr/local/include/c++/12/x86_64-linux-gnu/bits/c++config.h:655,
+                 from /usr/local/include/c++/12/bits/stl_algobase.h:59,
+                 from /usr/local/include/c++/12/vector:60,
+                 from /usr/local/include/dolfin/function/Expression.h:24:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:62:1: note: candidate: ‘double cos(double)’
+   62 | __MATHCALL_VEC (cos,, (_Mdouble_ __x));
+      | ^~~~~~~~~~~~~~
+In file included from /usr/local/include/c++/12/cmath:45:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:62:1: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘double’
+   62 | __MATHCALL_VEC (cos,, (_Mdouble_ __x));
+      | ^
+/usr/local/include/c++/12/cmath:188:3: note: candidate: ‘constexpr long double std::cos(long double)’
+  188 |   cos(long double __x)
+      |   ^~~
+/usr/local/include/c++/12/cmath:188:19: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘long double’
+  188 |   cos(long double __x)
+      |       ~~~~~~~~~~~~^~~
+/usr/local/include/c++/12/cmath:184:3: note: candidate: ‘constexpr float std::cos(float)’
+  184 |   cos(float __x)
+      |   ^~~
+/usr/local/include/c++/12/cmath:184:13: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘float’
+  184 |   cos(float __x)
+      |       ~~~~~~^~~
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:66:86: error: no matching function for call to ‘sin(Eigen::Ref<const Eigen::Matrix<double, -1, 1> >&)’
+   66 |           values[1] =  (y>0 ? (-K - (g*y)/(2*nu) + (K/2 - alpha*g/(4*nu*nu))*y*y)*sin(x) : 0.0);
+      |                                                                                   ~~~^~~
+/usr/local/include/c++/12/complex:855:5: note: candidate: ‘template<class _Tp> std::complex<_Tp> std::sin(const complex<_Tp>&)’
+  855 |     sin(const complex<_Tp>& __z) { return __complex_sin(__z.__rep()); }
+      |     ^~~
+/usr/local/include/c++/12/complex:855:5: note:   template argument deduction/substitution failed:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:66:86: note:   ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ is not derived from ‘const std::complex<_Tp>’
+   66 |           values[1] =  (y>0 ? (-K - (g*y)/(2*nu) + (K/2 - alpha*g/(4*nu*nu))*y*y)*sin(x) : 0.0);
+      |                                                                                   ~~~^~~
+/usr/local/include/c++/12/cmath:437:5: note: candidate: ‘template<class _Tp> constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::sin(_Tp)’
+  437 |     sin(_Tp __x)
+      |     ^~~
+/usr/local/include/c++/12/cmath:437:5: note:   template argument deduction/substitution failed:
+/usr/local/include/c++/12/cmath: In substitution of ‘template<class _Tp> constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::sin(_Tp) [with _Tp = Eigen::Ref<const Eigen::Matrix<double, -1, 1> >]’:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:66:86:   required from here
+/usr/local/include/c++/12/cmath:437:5: error: no type named ‘__type’ in ‘struct __gnu_cxx::__enable_if<false, double>’
+/usr/local/include/eigen3/Eigen/src/Core/GlobalFunctions.h:60:3: note: candidate: ‘template<class Derived> const Eigen::CwiseUnaryOp<Eigen::internal::scalar_sin_op<typename Derived::Scalar>, const Derived> Eigen::sin(const ArrayBase<Derived>&)’
+   60 |   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(sin,scalar_sin_op,sine,\sa ArrayBase::sin)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/local/include/eigen3/Eigen/src/Core/GlobalFunctions.h:60:3: note:   template argument deduction/substitution failed:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:66:86: note:   ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ is not derived from ‘const Eigen::ArrayBase<Derived>’
+   66 |           values[1] =  (y>0 ? (-K - (g*y)/(2*nu) + (K/2 - alpha*g/(4*nu*nu))*y*y)*sin(x) : 0.0);
+      |                                                                                   ~~~^~~
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:64:1: note: candidate: ‘double sin(double)’
+   64 | __MATHCALL_VEC (sin,, (_Mdouble_ __x));
+      | ^~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:64:1: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘double’
+   64 | __MATHCALL_VEC (sin,, (_Mdouble_ __x));
+      | ^
+/usr/local/include/c++/12/cmath:429:3: note: candidate: ‘constexpr long double std::sin(long double)’
+  429 |   sin(long double __x)
+      |   ^~~
+/usr/local/include/c++/12/cmath:429:19: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘long double’
+  429 |   sin(long double __x)
+      |       ~~~~~~~~~~~~^~~
+/usr/local/include/c++/12/cmath:425:3: note: candidate: ‘constexpr float std::sin(float)’
+  425 |   sin(float __x)
+      |   ^~~
+/usr/local/include/c++/12/cmath:425:13: note:   no known conversion for argument 1 from ‘Eigen::Ref<const Eigen::Matrix<double, -1, 1> >’ to ‘float’
+  425 |   sin(float __x)
+      |       ~~~~~~^~~
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp: In member function ‘virtual double dolfin::dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4::get_property(std::string) const’:
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:78:11: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   78 |           if (name == "K") return K;          if (name == "g") return g;          if (name == "nu") return nu;          if (name == "alpha") return alpha;
+      |           ^~
+/tmp/tmp9db5m3ap/dolfin_expression_5b558b5ef5869360321aa3d5acb9b2f4.cpp:78:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   78 |           if (name == "K") return K;          if (name == "g") return g;          if (name == "nu") return nu;          if (name == "alpha") return alpha;
+      |                                               ^~
