@@ -1,2 +1,0 @@
-Maximum von Mises stress on hole boundary: 7.381 MPa
-Stress concentration factor Kt = 3.691
