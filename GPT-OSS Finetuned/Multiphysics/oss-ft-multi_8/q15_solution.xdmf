@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="TimeSeries_f_24-0" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="9600" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="9600 3" NumberType="UInt" Format="HDF">q15_solution.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="4961 2" Format="HDF">q15_solution.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_24-0" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="4961 3" Format="HDF">q15_solution.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TimeSeries_f_65" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="9600" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="9600 3" NumberType="UInt" Format="HDF">q15_solution.h5:/Mesh/1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="4961 2" Format="HDF">q15_solution.h5:/Mesh/1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_65" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="4961 3" Format="HDF">q15_solution.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TimeSeries_f_24-1" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="9600" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="9600 3" NumberType="UInt" Format="HDF">q15_solution.h5:/Mesh/2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="4961 2" Format="HDF">q15_solution.h5:/Mesh/2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_24-1" AttributeType="Scalar" Center="Node">
+          <DataItem Dimensions="4961 1" Format="HDF">q15_solution.h5:/VisualisationVector/2</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TimeSeries_f_24-2" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="mesh" GridType="Uniform">
+        <Topology NumberOfElements="9600" TopologyType="Triangle" NodesPerElement="3">
+          <DataItem Dimensions="9600 3" NumberType="UInt" Format="HDF">q15_solution.h5:/Mesh/3/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="4961 2" Format="HDF">q15_solution.h5:/Mesh/3/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute Name="f_24-2" AttributeType="Scalar" Center="Node">
+          <DataItem Dimensions="4961 1" Format="HDF">q15_solution.h5:/VisualisationVector/3</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>
