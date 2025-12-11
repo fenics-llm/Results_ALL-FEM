@@ -1,2 +1,0 @@
-Drag force (x-direction) = -1.108767e-02 N
-Drag coefficient C_D    = -5.543834e+00
