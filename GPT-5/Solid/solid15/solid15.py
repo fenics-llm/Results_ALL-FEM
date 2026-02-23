@@ -1,244 +1,275 @@
-# q15_fenics.py
-# Legacy FEniCS (dolfin + mshr) nonlinear Saint-Venant–Kirchhoff (finite strain), plane strain
-from __future__ import print_function
+# q15_svk_strip_3holes.py
+#
+# Legacy FEniCS (dolfin + mshr) solution:
+# Finite-strain Saint-Venant–Kirchhoff (SVK), plane strain,
+# perforated strip with 3 holes, displacement-driven loading,
+# load stepping with Newton, stop when max principal GL strain <= 0.03.
+
 from dolfin import *
 from mshr import *
-import math
+import numpy as np
+
+# Non-interactive plotting
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-parameters["form_compiler"]["quadrature_degree"] = 3
-parameters["form_compiler"]["representation"] = "uflacs"
+# ----------------------------
+# 0) Problem parameters
+# ----------------------------
+Lx, Ly = 1.20, 0.20
+a = 0.03
+hole_centers = [(0.30, 0.10), (0.60, 0.10), (0.90, 0.10)]
 
-# --------------------------
-# Geometry and mesh
-# --------------------------
-Lx = 1.20
-Ly = 0.20
-yc = 0.10
-a  = 0.03
+# Material (convert MPa -> Pa for SI consistency)
+lmbda = Constant(5.769e6)
+mu    = Constant(3.846e6)
 
+# Prescribed displacement on right edge
+ux_total = 0.012  # m
+
+# Strain cap
+Emax_cap = 0.03
+
+# Mesh resolution (increase if you need more accuracy around holes)
+resolution = 50
+
+# Newton solver controls
+newton_abs_tol = 1e-8
+newton_rel_tol = 1e-7
+newton_max_it  = 30
+
+# Load stepping controls
+t_end   = 1.0
+dt      = 0.10     # initial step
+dt_min  = 1e-4     # smallest allowed step
+dt_max  = 0.20     # maximum step (optional growth)
+
+
+# ----------------------------
+# 1) Mesh: rectangle minus 3 circles
+# ----------------------------
 rect = Rectangle(Point(0.0, 0.0), Point(Lx, Ly))
-holes = [
-    Circle(Point(0.30, yc), a, 64),
-    Circle(Point(0.60, yc), a, 64),
-    Circle(Point(0.90, yc), a, 64),
-]
+
 domain = rect
-for h in holes:
-    domain = domain - h
+for (cx, cy) in hole_centers:
+    domain = domain - Circle(Point(cx, cy), a, 64)
 
-# Mesh resolution: choose a target cell size ~ 0.004–0.006 m to resolve the holes well
-mesh_resolution = 260  # increase if you want a finer mesh
-mesh = generate_mesh(domain, mesh_resolution)
+mesh = generate_mesh(domain, resolution)
 
-# --------------------------
-# Function spaces
-# --------------------------
-V = VectorFunctionSpace(mesh, "CG", 2)  # quadratic for accuracy
-u = Function(V, name="u")               # current displacement
-du = TrialFunction(V)
-v  = TestFunction(V)
+# ----------------------------
+# 2) Function space
+# ----------------------------
+V = VectorFunctionSpace(mesh, "CG", 2)  # quadratic displacement is common for hyperelasticity
+u = Function(V, name="u")               # unknown
+du = TrialFunction(V)                   # increment
+v  = TestFunction(V)                    # test
 
-# --------------------------
-# Material (MPa -> Pa)
-# --------------------------
-lam = 5.769e6  # Pa
-mu  = 3.846e6  # Pa
 
-I2 = Identity(2)
-
-def F_def(u_):
-    return I2 + grad(u_)
-
-def E_green(u_):
-    F = F_def(u_)
-    C = F.T*F
-    return 0.5*(C - I2)
-
-def S_svk(u_):
-    E = E_green(u_)
-    return lam*tr(E)*I2 + 2.0*mu*E
-
-def P_firstPK(u_):
-    F = F_def(u_)
-    S = S_svk(u_)
-    return F*S
-
-# --------------------------
-# Boundary conditions
-# --------------------------
-# Left edge fixed: u = (0,0)
-class Left(SubDomain):
+# ----------------------------
+# 3) Boundary definitions
+# ----------------------------
+class LeftBoundary(SubDomain):
     def inside(self, x, on_boundary):
-        return on_boundary and near(x[0], 0.0, DOLFIN_EPS)
+        return on_boundary and near(x[0], 0.0, 1e-8)
 
-# Right edge prescribed ux = t*Ux, uy = 0
-class Right(SubDomain):
+class RightBoundary(SubDomain):
     def inside(self, x, on_boundary):
-        return on_boundary and near(x[0], Lx, DOLFIN_EPS)
+        return on_boundary and near(x[0], Lx, 1e-8)
 
-left = Left()
-right = Right()
+left = LeftBoundary()
+right = RightBoundary()
 
-Ux_final = 0.012  # metres
-t_load = Constant(0.0)
+# Time/load-dependent right displacement (only u_x changes)
+u_R = Expression(("t*ux_total", "0.0"), t=0.0, ux_total=ux_total, degree=1)
 
-# Dirichlet BCs
-zero_vec = Constant((0.0, 0.0))
-bc_left  = DirichletBC(V, zero_vec, left)
-
-# Only ux prescribed on the right, uy = 0:
-# Build a mixed-style vector value where ux = t*Ux_final and uy = 0.
-ux_expr = Expression(("t*Ux", "0.0"), t=0.0, Ux=Ux_final, degree=1)
-bc_right = DirichletBC(V, ux_expr, right)
+bc_left      = DirichletBC(V, Constant((0.0, 0.0)), left)
+bc_right     = DirichletBC(V, u_R, right)
 
 bcs = [bc_left, bc_right]
 
-# --------------------------
-# Variational form (total Lagrangian)
-# --------------------------
-P = P_firstPK(u)
-Res = inner(P, grad(v))*dx
-Jac = derivative(Res, u, du)  # consistent tangent
 
-# --------------------------
-# Helpers: principal strains and von Mises of S deviatoric
-# --------------------------
-# For a 2x2 symmetric tensor T, principal values:
-# λ_max = 0.5*(trT + sqrt((T11-T22)^2 + 4*T12^2))
-def principal_max_value(T):
-    t = tr(T)
-    d = T[0,0] - T[1,1]
-    off = T[0,1]
-    rad = sqrt(0.25*d*d + off*off)
-    return 0.5*t + rad
+# ----------------------------
+# 4) Kinematics + SVK energy
+# ----------------------------
+I2 = Identity(2)
+F2 = I2 + grad(u)            # deformation gradient (2D)
 
-def deviatoric_2nd(S):
-    return S - (1.0/3.0)*tr(S)*I2
+# Embed into 3D for True Plane Strain (matches Reference)
+F3 = as_tensor([[F2[0, 0], F2[0, 1], 0.0],
+                [F2[1, 0], F2[1, 1], 0.0],
+                [0.0,      0.0,      1.0]])
 
-def von_mises_S(S):
-    s = deviatoric_2nd(S)
-    # σ_vm(S) = sqrt(1.5 * s:s)
-    return sqrt(1.5*inner(s, s))
+I3 = Identity(3)
+E3 = 0.5*(F3.T*F3 - I3)      # 3x3 Green–Lagrange strain
+S3 = lmbda*tr(E3)*I3 + 2.0*mu*E3     # 3x3 2nd PK stress
+P3 = F3*S3                           # 3x3 1st PK stress
 
-# Scalar spaces for projection/visualisation (colour maps)
-Q = FunctionSpace(mesh, "CG", 1)
+# In-plane part used in the weak form
+P2 = as_tensor([[P3[0, 0], P3[0, 1]],
+                [P3[1, 0], P3[1, 1]]])
 
-def compute_Emax(u_):
-    E = E_green(u_)
-    Emax_expr = principal_max_value(E)
-    Emax = project(Emax_expr, Q, solver_type="cg", preconditioner_type="ilu")
-    Emax.rename("E_max", "E_max")
-    return Emax
+# Residual and consistent tangent (automatic differentiation)
+R = inner(P2, grad(v))*dx
+J = derivative(R, u, du)
 
-def compute_vmS(u_):
-    S = S_svk(u_)
-    vm_expr = von_mises_S(S)
-    vm = project(vm_expr, Q, solver_type="cg", preconditioner_type="ilu")
-    vm.rename("vmS", "vmS")
-    return vm
 
-# --------------------------
-# Nonlinear solver
-# --------------------------
-problem = NonlinearVariationalProblem(Res, u, bcs, Jac)
+# ----------------------------
+# 5) Nonlinear solver setup
+# ----------------------------
+problem = NonlinearVariationalProblem(R, u, bcs, J)
 solver  = NonlinearVariationalSolver(problem)
-prm = solver.parameters
-prm["nonlinear_solver"] = "newton"
-prm["newton_solver"]["absolute_tolerance"] = 1e-9
-prm["newton_solver"]["relative_tolerance"] = 1e-8
-prm["newton_solver"]["maximum_iterations"] = 30
-prm["newton_solver"]["linear_solver"] = "mumps"
 
-# --------------------------
-# Load stepping with strain cap E_max <= 0.03
-# --------------------------
-Emax_cap = 0.03
-num_steps = 20  # start reasonably fine; solver is robust for this material
-accepted_u = Function(V)  # to hold last accepted state
+prm = solver.parameters["newton_solver"]
+prm["absolute_tolerance"] = newton_abs_tol
+prm["relative_tolerance"] = newton_rel_tol
+prm["maximum_iterations"] = newton_max_it
+prm["relaxation_parameter"] = 1.0
+prm["error_on_nonconvergence"] = True
+# Use a robust direct solver if available
+prm["linear_solver"] = "mumps"
 
-# XDMF writers (append last state at the end)
-xdmf_u    = XDMFFile(MPI.comm_world, "q15_u.xdmf")
-xdmf_Emax = XDMFFile(MPI.comm_world, "q15_Emax.xdmf")
-xdmf_u.parameters["flush_output"] = True
-xdmf_Emax.parameters["flush_output"] = True
-xdmf_u.parameters["functions_share_mesh"] = True
-xdmf_Emax.parameters["functions_share_mesh"] = True
+set_log_level(LogLevel.PROGRESS)
 
-# Step the load and stop if the principal strain cap would be exceeded
-last_accepted_step = -1
-for i in range(1, num_steps+1):
-    tval = float(i)/float(num_steps)
-    ux_expr.t = tval  # update prescribed displacement multiplier
 
+# ----------------------------
+# 6) Post-processing expressions
+# ----------------------------
+# Max principal Green-Lagrange strain in 2D (matches Reference E1 logic):
+E_xx = E3[0, 0]
+E_yy = E3[1, 1]
+E_xy = E3[0, 1]
+rad = sqrt(((E_xx - E_yy) / 2.0)**2 + E_xy**2)
+E1_expr = (E_xx + E_yy) / 2.0 + rad
+Emax_expr = conditional(gt(E1_expr, 0.0), E1_expr, 0.0)
+
+# For von Mises of PK2 stress
+s3 = S3 - (1.0/3.0)*tr(S3)*I3
+vmS_expr = sqrt(1.5*inner(s3, s3))
+
+# Spaces for projection
+V0 = FunctionSpace(mesh, "DG", 0)
+
+
+def compute_max_Emax():
+    """Project Emax to DG0 and return (Emax_function, max_value)."""
+    Emax_fun = project(Emax_expr, V0)
+    max_val = Emax_fun.vector().get_local().max()
+    return Emax_fun, max_val
+
+
+# ----------------------------
+# 7) Load stepping with strain cap
+# ----------------------------
+u_prev = Function(V)
+u_prev.assign(u)
+
+t = 0.0
+accepted = 0
+
+print("\n--- Load stepping (cap E_max <= %.5f) ---" % Emax_cap)
+while t < t_end - 1e-14 and dt >= dt_min:
+    t_trial = min(t + dt, t_end)
+
+    # Apply trial displacement multiplier (t in [0,1])
+    u_R.t = t_trial
+
+    # Good practice: start Newton from last accepted solution
+    u.assign(u_prev)
+
+    converged = True
     try:
         solver.solve()
     except RuntimeError as e:
-        # Newton failed: back off and break
-        print("Newton failed at step {} (t = {:.3f}). Stopping.".format(i, tval))
-        break
+        converged = False
 
-    # Check principal Green–Lagrange strain
-    Emax = compute_Emax(u)
-    Emax_array = Emax.vector().get_local()
-    Emax_max   = float(Emax_array.max()) if len(Emax_array) else 0.0
-    print("Step {:2d}/{:2d}, t = {:.3f}, max E_max = {:.6f}".format(i, num_steps, tval, Emax_max))
-
-    if Emax_max <= Emax_cap + 1e-12:
-        # Accept and store
-        accepted_u.assign(u)
-        last_accepted_step = i
-        # Continue to next step
+    if converged:
+        Emax_fun, maxE = compute_max_Emax()
+        print("t_trial = %.6f | dt = %.3e | max(E_max) = %.6f" % (t_trial, dt, maxE))
     else:
-        # Do not advance the load; keep last accepted solution and stop
-        print("Strain cap exceeded (E_max = {:.6f} > {}). Reverting and stopping.".format(Emax_max, Emax_cap))
-        u.assign(accepted_u)
-        # Recompute Emax for the reverted state for outputs
-        Emax = compute_Emax(u)
-        break
+        maxE = np.inf
+        print("t_trial = %.6f | dt = %.3e | Newton did not converge" % (t_trial, dt))
 
-# If nothing was accepted (pathological), keep the initial (zero) state
-if last_accepted_step < 0:
-    print("No step accepted; outputs will reflect the initial state.")
-    Emax = compute_Emax(u)
+    # Accept/reject rule
+    if converged and maxE <= Emax_cap + 1e-12:
+        # Accept
+        t = t_trial
+        u_prev.assign(u)
+        accepted += 1
 
-# --------------------------
-# Post-processing & outputs
-# --------------------------
-# 1) Deformed configuration plot
-#    Using displacement plot (Fenics visual). Scale = 1 (true), since units are metres.
-plt.figure()
-plot(u, mode="displacement", title="Deformed configuration (true scale)")
-plt.xlabel("x [m]"); plt.ylabel("y [m]")
+        # Optional: grow dt a bit after success
+        dt = min(1.2*dt, dt_max)
+    else:
+        # Reject: do NOT advance load, reduce dt
+        u.assign(u_prev)
+        u_R.t = t
+        dt *= 0.5
+
+print("\nAccepted steps:", accepted)
+print("Final accepted load factor t = %.6f" % t)
+
+# Ensure u holds the accepted solution
+u.assign(u_prev)
+u_R.t = t
+
+# Final fields for output
+Emax_fun = project(Emax_expr, V0)
+vmS_fun  = project(vmS_expr, V0)
+Emax_fun.rename("E_max", "max_principal_Green_Lagrange_strain")
+vmS_fun.rename("vmS", "vonMises_of_PK2")
+
+
+# ----------------------------
+# 8) Save figures (PNG)
+# ----------------------------
+# Deformed configuration plot
+plt.figure(figsize=(10, 2.2))
+plot(u, mode="displacement")
+plt.gca().set_aspect("equal", "box")
+plt.title("Deformed configuration (u applied, t=%.4f)" % t)
 plt.tight_layout()
-plt.savefig("q15_def.png", dpi=200)
+plt.savefig("q15_def.png", dpi=300)
 plt.close()
 
-# 2) E_max colour map
-plt.figure()
-pE = plot(Emax, title="Max principal Green–Lagrange strain, E_max")
-plt.colorbar(pE)
-plt.xlabel("x [m]"); plt.ylabel("y [m]")
+# E_max colormap
+plt.figure(figsize=(10, 2.2))
+p = plot(Emax_fun)
+plt.gca().set_aspect("equal", "box")
+plt.title("Max principal Green–Lagrange strain E_max (t=%.4f)" % t)
+plt.colorbar(p)
 plt.tight_layout()
-plt.savefig("q15_Emax.png", dpi=200)
+plt.savefig("q15_Emax.png", dpi=300)
 plt.close()
 
-# 3) von Mises of S (deviatoric)
-vmS = compute_vmS(u)
-plt.figure()
-pV = plot(vmS, title="von Mises of second PK stress, ||s|| (Pa)")
-plt.colorbar(pV)
-plt.xlabel("x [m]"); plt.ylabel("y [m]")
+# von Mises of PK2 stress colormap
+plt.figure(figsize=(10, 2.2))
+p = plot(vmS_fun)
+plt.gca().set_aspect("equal", "box")
+plt.title("von Mises of PK2 stress σ_vm(S) (t=%.4f)" % t)
+plt.colorbar(p)
 plt.tight_layout()
-plt.savefig("q15_vmS.png", dpi=200)
+plt.savefig("q15_vmS.png", dpi=300)
 plt.close()
 
-# 4) XDMF exports (final accepted state)
-#    Write mesh + functions (one time slice)
-u.rename("u", "u")
+
+# ----------------------------
+# 9) Export XDMF (final u and E_max)
+# ----------------------------
+# Displacement
+xdmf_u = XDMFFile(mesh.mpi_comm(), "q15_u.xdmf")
+xdmf_u.parameters["flush_output"] = True
 xdmf_u.write(u, 0.0)
-xdmf_Emax.write(Emax, 0.0)
+xdmf_u.close()
 
-print("Saved files: q15_def.png, q15_Emax.png, q15_vmS.png, q15_u.xdmf, q15_Emax.xdmf")
+# E_max
+xdmf_e = XDMFFile(mesh.mpi_comm(), "q15_Emax.xdmf")
+xdmf_e.parameters["flush_output"] = True
+xdmf_e.write(Emax_fun, 0.0)
+xdmf_e.close()
+
+print("\nWrote:")
+print("  q15_def.png")
+print("  q15_Emax.png")
+print("  q15_vmS.png")
+print("  q15_u.xdmf (+ .h5)")
+print("  q15_Emax.xdmf (+ .h5)")
