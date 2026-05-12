@@ -54,14 +54,9 @@ def walls(x, on_boundary):
 
 bc_walls = DirichletBC(W.sub(0), Constant((0.0, 0.0)), walls)
 
-# Pin pressure at a single interior point to eliminate the nullspace
-class PressurePoint(SubDomain):
-    def inside(self, x, on_boundary):
-        return near(x[0], 0.0) and near(x[1], 0.0)
+bc_p = DirichletBC(W.sub(1), Constant(0.0), "pointwise")
 
-bc_p = DirichletBC(W.sub(1), Constant(0.0), PressurePoint(), "pointwise")
-
-bcs = [bc_walls, bc_p]
+bcs = [bc_walls]
 
 # -------------------------------------------------
 # 6. Variational formulation (steady Stokes)
